@@ -1,24 +1,28 @@
 @extends('layouts.app')
 @section('content')
-    <a href="{{route('admin.stores.create')}}" class="btn btn-sm btn-success float-right">Cadastrar Loja</a>
+    <a href="{{route('admin.products.create')}}" class="btn btn-sm btn-success float-right">Cadastrar Produto</a>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>#</th>
+            <th>Nome</th>
             <th>Loja</th>
+            <th>Preço</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($stores as $store)
+        @foreach($products as $product)
             <tr>
-                <td>{{$store->id}}</td>
-                <td>{{$store->name}}</td>
+                <td>{{$product->id}}</td>
+                <td>{{$product->name}}</td>
+                <td>{{$product->store->name}}</td>
+                <td>R$ {{number_format($product->price, 2, ',', '.')}}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{route('admin.stores.edit', ['store' => $store->id])}}"
+                        <a href="{{route('admin.products.edit', ['product' => $product->id])}}"
                            class="btn btn-sm btn-warning">Editar</a>
-                        <form action="{{route('admin.stores.destroy', ['store' => $store->id])}}" method="post">
+                        <form action="{{route('admin.products.destroy', ['product' => $product->id])}}" method="post">
                             @csrf
                             @method("DELETE")
                             <button class="btn btn-sm btn-danger">Remover</button>
@@ -29,5 +33,5 @@
         @endforeach
         </tbody>
     </table>
-    {{$stores->links()}}
+    {{$products->links()}}
 @endsection

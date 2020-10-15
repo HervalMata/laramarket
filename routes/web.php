@@ -19,5 +19,6 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('/stores', \App\Http\Controllers\Admin\StoreController::class);
+    Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
 });
 

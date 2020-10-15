@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @method static paginate(int $int)
+ * @method static find($product)
+ * @method static findOrFail($product)
+ */
 class Product extends Model
 {
     use HasFactory;
