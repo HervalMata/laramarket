@@ -15,10 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('/stores', \App\Http\Controllers\Admin\StoreController::class);
+        Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
+    });
 });
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('/stores', \App\Http\Controllers\Admin\StoreController::class);
-    Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
-});
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
