@@ -6,6 +6,7 @@
         <tr>
             <th>#</th>
             <th>Nome</th>
+            <th>Categoria</th>
             <th>Loja</th>
             <th>Preço</th>
             <th>Ações</th>
@@ -16,6 +17,7 @@
             <tr>
                 <td>{{$product->id}}</td>
                 <td>{{$product->name}}</td>
+                <td>{{$product->category->name}}</td>
                 <td>{{$product->store->name}}</td>
                 <td>R$ {{number_format($product->price, 2, ',', '.')}}</td>
                 <td>

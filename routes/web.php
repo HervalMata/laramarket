@@ -21,6 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/stores', \App\Http\Controllers\Admin\StoreController::class);
         Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
+        Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class);
+        Route::post('photos/remove', [\App\Http\Controllers\Admin\ProductPhotoController::class, 'removePhoto'])->name('photo.remove');
     });
 });
 

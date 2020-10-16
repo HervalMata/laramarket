@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,6 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'required|min:30',
-            'body' => 'required',
-            'price' => 'required',
-            'photos' => 'image'
         ];
     }
 
@@ -38,9 +34,7 @@ class ProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'Este campo :attribute é obrigatório',
-            'min' => 'Campo deve ter no minino :min caracteres',
-            'image' => 'Arquivo não é uma imagem válida'
+            'required' => 'Este campo :attribute é obrigatório'
         ];
     }
 }

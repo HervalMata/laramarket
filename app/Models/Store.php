@@ -15,7 +15,7 @@ class Store extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'phone', 'mobile_phone', 'slug'];
+    protected $fillable = ['name', 'description', 'phone', 'mobile_phone', 'slug', 'logo'];
 
     /**
      * @return BelongsTo

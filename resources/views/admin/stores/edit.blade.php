@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <h1>Atualizar Loja</h1>
-    <form action="{{route('admin.stores.update', ['store' => $store->id])}}" method="post">
+    <form action="{{route('admin.stores.update', ['store' => $store->id])}}" method="post"
+          enctype="multipart/form-data">
         @csrf
         @method("PUT")
         <div class="form-group">
@@ -16,7 +17,8 @@
         </div>
         <div class="form-group">
             <label>Descrição</label>
-            <textarea rows="10" cols="20" name="description" class="form-control" @error('description') is-invalid @enderror>"{{$store->description}}"</textarea>
+            <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
+                   value="{{$store->description}}">
             @error('description')
             <div class="invalid-feedback">
                 {{$message}}
@@ -38,6 +40,18 @@
             <input type="text" name="mobile_phone" class="form-control @error('mobile_phone') is-invalid @enderror"
                    value="{{$store->mobile_phone}}">
             @error('mobile_phone')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <p>
+                <img src="{{asset('storage/' . $store->logo)}}" alt="">
+            </p>
+            <label>Logo da Loja</label>
+            <input type="file" name="logo" class="form-control @error('logo') is-invalid @enderror">
+            @error('logo')
             <div class="invalid-feedback">
                 {{$message}}
             </div>

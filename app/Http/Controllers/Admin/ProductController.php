@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
+use App\Traits\UploadTrait;
 use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
+
     /**
      * @var Product
      */
@@ -31,7 +35,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $userStore = auth()->user()->store;
+        $products = $userStore->products()->paginate(10);
         return view('admin.products.index', compact('products'));
     }
 
@@ -43,7 +48,8 @@ class ProductController extends Controller
     public function create()
     {
         $stores = Store::all(['id', 'name']);
-        return view('admin.products.create', compact('stores'));
+        $categories = Category::all(['id', 'name']);
+        return view('admin.products.create', compact('stores', 'categories'));
     }
 
     /**
@@ -56,7 +62,11 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $store = auth()->user()->store;
-        $store->products()->create($data);
+        $product = $store->products()->create($data);
+        if ($request->hasFile('photos')) {
+            $images = $this->imageUpload($request->file('photos'), 'image');
+            $product->photos()->createMany($images);
+        }
         flash('Produto criado com sucesso')->success();
         return redirect()->route('admin.products.index');
     }
@@ -81,7 +91,8 @@ class ProductController extends Controller
     public function edit($product)
     {
         $product = Product::findOrFail($product);
-        return view('admin.products.edit', compact('product'));
+        $categories = Category::all(['id', 'name']);
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -96,6 +107,10 @@ class ProductController extends Controller
         $data = $request->all();
         $product = Product::find($product);
         $product->update($data);
+        if ($request->hasFile('photos')) {
+            $images = $this->imageUpload($request->file('photos'), 'image');
+            $product->photos()->createMany($images);
+        }
         flash('Produto atualizado com sucesso')->success();
         return redirect()->route('admin.products.index');
     }
