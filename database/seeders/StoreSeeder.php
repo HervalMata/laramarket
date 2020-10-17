@@ -15,9 +15,18 @@ class StoreSeeder extends Seeder
      */
     public function run()
     {
+        /*$user = User::where('name', 'Admin')->get();
+        //$userId = $user->id;
+        Store::factory(1)->make([
+            'name' => 'CrisLaços',
+            'description' => 'Laços Maravilhosos para lhes enfeitar',
+            'user_id' => $user,
+        ]);*/
         $stores = Store::all();
         foreach ($stores as $store) {
-            $store->products()->save(Product::factory()->make());
+            for ($i = 0; $i < 40; $i++) {
+                $store->products()->save(Product::factory()->make());
+            }
         }
     }
 }

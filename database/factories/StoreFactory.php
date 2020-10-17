@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Store;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StoreFactory extends Factory
@@ -26,7 +27,8 @@ class StoreFactory extends Factory
             'description' => $this->faker->sentence,
             'phone' => $this->faker->phoneNumber,
             'mobile_phone' => $this->faker->phoneNumber,
-            'slug' => $this->faker->slug,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

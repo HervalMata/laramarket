@@ -20,6 +20,7 @@ class CreateStoreTable extends Migration
             $table->string('description');
             $table->string('phone');
             $table->string('mobile_phone');
+            $table->string('logo')->nullable();
             $table->string('slug');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

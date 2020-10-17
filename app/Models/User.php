@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @method static find($user)
+ * @method static where(array $array)
  */
 class User extends Authenticatable
 {

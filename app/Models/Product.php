@@ -13,6 +13,8 @@ use Spatie\Sluggable\SlugOptions;
  * @method static paginate(int $int)
  * @method static find($product)
  * @method static findOrFail($product)
+ * @method limit(int $int)
+ * @method whereSlug($slug)
  */
 class Product extends Model
 {

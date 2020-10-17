@@ -13,8 +13,8 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($stores as $store)
-            <tr>
+
+        <tr>
                 <td>{{$store->id}}</td>
                 <td>{{$store->name}}</td>
                 <td>{{$store->products->count()}}</td>
@@ -30,9 +30,9 @@
                     </div>
                 </td>
             </tr>
-        @endforeach
+
         </tbody>
     </table>
-    {{$stores->links()}}
+
     @endif
 @endsection

@@ -15,6 +15,21 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        User::factory(1)->create([
+            'name' => 'Admin',
+            'email' => 'admin@loja.com',
+            //'password' => '123456'
+        ])->each(function ($user) {
+            $user->store()->save(Store::factory()->make([
+                'name' => 'CrisLaços',
+                'description' => 'Laços Maravilhosos para lhes enfeitar',
+            ]));
+        });
+        User::factory(1)->create([
+            'name' => 'Comprador',
+            'email' => 'comprador@loja.com',
+            //'password' => '123456'
+        ]);
         User::factory(40)->create()->each(function ($user) {
             $user->store()->save(Store::factory()->make());
         });

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
@@ -29,8 +30,9 @@ class ProductFactory extends Factory
             'description' => $this->faker->sentence,
             'body' => $this->faker->paragraph(5, true),
             'price' => $this->faker->randomFloat(2, 1, 10),
-            'slug' => $this->faker->slug,
-            'category_id' => $category->id
+            'category_id' => $category->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

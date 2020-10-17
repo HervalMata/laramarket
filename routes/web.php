@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-})->name('home');
+})->name('home');*/
 
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('admin')->name('admin.')->group(function () {
@@ -29,4 +29,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/product/{slug}', [\App\Http\Controllers\HomeController::class, 'single'])->name('product.single');
+Route::prefix('cart')->name('cart.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\CartController::class, 'index'])->name('index');
+    Route::get('remove/{slug}', [\App\Http\Controllers\CartController::class, 'remove'])->name('remove');
+    Route::post('add', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
+    Route::get('cancel', [\App\Http\Controllers\CartController::class, 'cancel'])->name('cancel');
+});
+//Route::post('/cart/{slug}', [\App\Http\Controllers\HomeController::class, 'single'])->name('product.single');

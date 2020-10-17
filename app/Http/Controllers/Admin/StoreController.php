@@ -29,8 +29,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = Store::paginate(10);
-        return view('admin.stores.index', compact('stores'));
+        $store = auth()->user()->store;
+        return view('admin.stores.index', compact('store'));
     }
 
     /**
