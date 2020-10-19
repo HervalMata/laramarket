@@ -37,4 +37,9 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::post('add', [\App\Http\Controllers\CartController::class, 'add'])->name('add');
     Route::get('cancel', [\App\Http\Controllers\CartController::class, 'cancel'])->name('cancel');
 });
+Route::prefix('checkout')->name('checkout.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('index');
+    Route::post('/proccess', [\App\Http\Controllers\CheckoutController::class, 'proccess'])->name('proccess');
+    Route::get('/thanks', [\App\Http\Controllers\CheckoutController::class, 'thanks'])->name('thanks');
+});
 //Route::post('/cart/{slug}', [\App\Http\Controllers\HomeController::class, 'single'])->name('product.single');

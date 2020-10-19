@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory(1)->create([
-            'name' => 'Admin',
+            'name' => 'Admin da Loja',
             'email' => 'admin@loja.com',
             //'password' => '123456'
         ])->each(function ($user) {
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             ]));
         });
         User::factory(1)->create([
-            'name' => 'Comprador',
+            'name' => 'Comprador da Loja',
             'email' => 'comprador@loja.com',
             //'password' => '123456'
         ]);

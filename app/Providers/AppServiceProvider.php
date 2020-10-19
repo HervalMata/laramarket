@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+        \PagSeguro\Library::initialize();
+        \PagSeguro\Library::cmsVersion()->setName("CrisLaços")->setRelease("1.0.0");
+        \PagSeguro\Library::moduleVersion()->setName("CrisLaços")->setRelease("1.0.0");
     }
 }

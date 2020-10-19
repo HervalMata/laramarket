@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->sentence,
             'body' => $this->faker->paragraph(5, true),
-            'price' => $this->faker->randomFloat(2, 1, 10),
+            'price' => $this->faker->randomFloat(2, 25, 50),
             'category_id' => $category->id,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
