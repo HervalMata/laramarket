@@ -12,6 +12,8 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * @method static paginate(int $int)
  * @method static find(Store $store)
+ * @method static limit(int $int)
+ * @method whereSlug($slug)
  */
 class Store extends Model
 {

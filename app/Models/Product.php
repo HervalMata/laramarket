@@ -15,13 +15,14 @@ use Spatie\Sluggable\SlugOptions;
  * @method static findOrFail($product)
  * @method limit(int $int)
  * @method whereSlug($slug)
+ * @method where(string $string, $category)
  */
 class Product extends Model
 {
     use HasFactory;
     use HasSlug;
 
-    protected $fillable = ['name', 'description', 'body', 'price', 'slug'];
+    protected $fillable = ['id', 'name', 'description', 'body', 'price', 'slug', 'category_id'];
 
     /**
      * @return BelongsTo

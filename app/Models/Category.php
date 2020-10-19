@@ -12,13 +12,15 @@ use Spatie\Sluggable\SlugOptions;
  * @method paginate(int $int)
  * @method findOrFail(int $category)
  * @method find(int $category)
+ * @method static limit(int $int)
+ * @method whereSlug($slug)
  */
 class Category extends Model
 {
     use HasFactory;
     use HasSlug;
 
-    protected $fillable = ['name', 'description', 'slug'];
+    protected $fillable = ['id', 'name', 'description', 'slug'];
 
     /**
      * @return HasMany

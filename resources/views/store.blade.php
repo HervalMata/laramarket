@@ -2,7 +2,27 @@
 
 @section('content')
     <div class="row front">
-        @foreach($products as $key => $product)
+        <div class="col-4">
+            @if($store->logo)
+                <img src="{{asset('storage/' . $store->logo)}}" alt="Logo da loja {{$store->name}}" class="img-fluid">
+            @else
+                <img src="https://via.placeholder.com/250x100.png?text=logo" alt="" class="img-fluid">
+            @endif
+        </div>
+        <div class="col-8">
+            <h2>{{$store->name}}</h2>
+            <p>{{$store->description}}</p>
+            <p>
+            <h4>Contatos:</h4>
+            <span>{{$store->phone}}</span> | <span>{{$store->mobile_phone}}</span>
+            </p>
+            <hr>
+        </div>
+        <div class="col-12">
+            <h3>Produtos desta loja</h3>
+            <hr>
+        </div>
+        @forelse($products as $key => $product)
             <div class="col-md-4">
                 <div class="card" style="width: 80%;">
                     @if($product->photos->count())
@@ -21,26 +41,11 @@
             </div>
             @if(($key + 1) % 2 == 0) </div>
     <div class="row front"> @endif
-        @endforeach
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <h2>Lojas em destaque</h2>
-            <hr>
-        </div>
-        @foreach($stores as $store)
-            <div class="col-4">
-                @if($store->logo)
-                    <img src="{{asset('storage/' . $store->logo)}}" alt="Logo da loja {{$store->name}}"
-                         class="img-fluid">
-                @else
-                    <img src="https://via.placeholder.com/250x100.png?text=logo" alt="" class="img-fluid">
-                @endif
-                <h3>{{$store->name}}</h3>
-                <p>{{$store->description}}</p>
-                <a href="{{route('store.single', ['slug' => $store->slug])}}" class="btn btn-sm btn-success">Ver
-                    Loja</a>
+        @empty
+            <div class="col-12">
+                <h3 class="alert alert-warning">Nenhum produto encontrado para esta loja</h3>
             </div>
-        @endforeach
+        @endforelse
     </div>
+
 @endsection
