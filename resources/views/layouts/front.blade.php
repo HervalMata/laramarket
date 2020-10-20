@@ -52,6 +52,9 @@
                     <li class="nav-item">
                         <span class="nav-link">{{auth()->user()->name}}</span>
                     </li>
+                        <li class="nav-item @if(request()->is('my-orders')) active @endif">
+                            <a href="{{route('user.orders')}}" class="nav-link">Meus Pedidos</a>
+                        </li>
                     @endauth
                     <li class="nav-item">
                         <a href="{{route('cart.index')}}" class="nav-link">
@@ -75,7 +78,7 @@
 </div>
 @yield('scripts')
 <!-- jQuery and JS bundle w/ Popper.js -->
-{{--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--}}
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function single($slug)
     {
         $product = $this->product->whereSlug($slug)->first();
-        dd($product);
+        //dd($product);
         return view('single', compact('product'));
     }
 }
