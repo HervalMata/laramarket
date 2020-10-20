@@ -22,8 +22,8 @@ class CreateProductsTable extends Migration
             $table->text('body');
             $table->decimal('price', 10, 2);
             $table->string('slug');
-            $table->foreign('store_id')->references('id')->on('stores');
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

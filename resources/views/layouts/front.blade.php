@@ -38,9 +38,9 @@
             @endforeach
         </ul>
 
-            <div class="my-2 my-lg-0">
-                <ul class="navbar-nav mr-auto">
-                    @auth
+        <div class="my-2 my-lg-0">
+            <ul class="navbar-nav mr-auto">
+                @auth
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="event.preventDefault();
                                                                   document.querySelector('form.logout').submit(); ">Sair</a>
@@ -52,23 +52,28 @@
                     <li class="nav-item">
                         <span class="nav-link">{{auth()->user()->name}}</span>
                     </li>
-                        <li class="nav-item @if(request()->is('my-orders')) active @endif">
-                            <a href="{{route('user.orders')}}" class="nav-link">Meus Pedidos</a>
-                        </li>
-                    @endauth
-                    <li class="nav-item">
-                        <a href="{{route('cart.index')}}" class="nav-link">
-                            @if(session()->has('cart'))
-                                <span
-                                    class="badge badge-danger">{{array_sum(array_column(session()->get('cart'), 'amount'))}}</span>
-                            @endif
-                            <i class="fa fa-shopping-cart fa-1x"></i>
-                        </a>
+                    <li class="nav-item @if(request()->is('my-orders')) active @endif">
+                        <a href="{{route('user.orders')}}" class="nav-link">Meus Pedidos</a>
                     </li>
-                </ul>
-            </div>
-
-
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           onclick="event.preventDefault(); document.querySelector('form.logout').submit();">Sair</a>
+                        <form action="{{route('logout')}}" class="logout" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
+                <li class="nav-item">
+                    <a href="{{route('cart.index')}}" class="nav-link">
+                        @if(session()->has('cart'))
+                            <span
+                                class="badge badge-danger">{{array_sum(array_column(session()->get('cart'), 'amount'))}}</span>
+                        @endif
+                        <i class="fa fa-shopping-cart fa-1x"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 

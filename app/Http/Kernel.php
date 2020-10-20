@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AccessControlStoreAdmin;
 use App\Http\Middleware\UserHasStore;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -64,5 +65,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user.has.store' => UserHasStore::class,
+        'access.control.store.admin' => AccessControlStoreAdmin::class,
     ];
 }

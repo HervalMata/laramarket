@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 })->name('home');*/
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('my-orders', [\App\Http\Controllers\UserOrderController::class, 'index'])->name('user.orders');
+Route::get('my-orders', [\App\Http\Controllers\UserOrderController::class, 'index'])->name('user.orders')->middleware('auth');
+
+Route::group(['middleware' => ['auth', 'access.control.store.admin']], function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('/stores', \App\Http\Controllers\Admin\StoreController::class);
         Route::resource('/products', \App\Http\Controllers\Admin\ProductController::class);
@@ -49,5 +50,6 @@ Route::prefix('checkout')->name('checkout.')->group(function () {
     Route::get('/', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('index');
     Route::post('/proccess', [\App\Http\Controllers\CheckoutController::class, 'proccess'])->name('proccess');
     Route::get('/thanks', [\App\Http\Controllers\CheckoutController::class, 'thanks'])->name('thanks');
+    Route::post('/notification', [\App\Http\Controllers\CheckoutController::class, 'notification'])->name('notification');
 });
 //Route::post('/cart/{slug}', [\App\Http\Controllers\HomeController::class, 'single'])->name('product.single');
