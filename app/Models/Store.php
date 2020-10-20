@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\StoreReceiveNewOrder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,7 @@ use Spatie\Sluggable\SlugOptions;
  * @method static find(Store $store)
  * @method static limit(int $int)
  * @method whereSlug($slug)
+ * @method whereIn(string $string, array $storesId)
  */
 class Store extends Model
 {
@@ -55,5 +57,17 @@ class Store extends Model
     public function orders()
     {
         return $this->belongsToMany(UserOrder::class, 'order_store', 'store_id', 'order_id');
+    }
+
+    /**
+     * @param array $storesId
+     * @return mixed
+     */
+    public function notifyStoreOrders(array $storesId = [])
+    {
+        $stores = $this->whereIn('id', $storesId)->get();
+        $stores->map(function ($store) {
+            return $store->user;
+        })->each->notify(new StoreReceiveNewOrder());
     }
 }

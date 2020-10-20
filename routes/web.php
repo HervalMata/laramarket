@@ -25,6 +25,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/categories', \App\Http\Controllers\Admin\CategoryController::class);
         Route::post('photos/remove', [\App\Http\Controllers\Admin\ProductPhotoController::class, 'removePhoto'])->name('photo.remove');
         Route::get('orders/my', [\App\Http\Controllers\Admin\OrdersController::class, 'index'])->name('orders.my');
+        Route::get('notifications', [\App\Http\Controllers\Admin\NotificationController::class, 'index'])->name('notifications.index');
+        Route::get('notifications/read-all', [\App\Http\Controllers\Admin\NotificationController::class, 'readAll'])->name('notifications.read.all');
+        Route::get('notifications/read', [\App\Http\Controllers\Admin\NotificationController::class, 'read'])->name('notifications.read');
     });
 });
 
